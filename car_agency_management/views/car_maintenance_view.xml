@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="action_car_maintenance" model="ir.actions.act_window">
+            <field name="name">Vehicles Maintenance</field>
+            <field name="res_model">car.maintenance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_car_maintenance_tree" model="ir.ui.view">
+            <field name="name">car.maintenance.tree</field>
+            <field name="model">car.maintenance</field>
+            <field name="arch" type="xml">
+                <tree string="Car Maintenance">
+                    <field name="car_id"/>
+                    <field name="maintenance_date"/>
+                    <field name="maintenance_type"/>
+                    <field name="cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_maintenance_form" model="ir.ui.view">
+            <field name="name">maintenance.form</field>
+            <field name="model">car.maintenance</field>
+            <field name="arch" type="xml">
+                <form string="Maintenance ">
+                    <header>
+                        <button name="create_invoice" type="object" string="Create Invoice" class="oe_highlight" invisible="invoice_created == True"/>
+                        <button name="check_invoice" type="object" string="Check Invoice" class="oe_highlight" invisible="invoice_created == False"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="car_id"/>
+                            <field name="invoice_created" invisible="True"/>
+                            <field name="maintenance_date"/>
+                            <field name="maintenance_type"/>
+                            <field name="description"/>
+                            <field name="cost"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

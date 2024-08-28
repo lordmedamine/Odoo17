@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="car_agency_view_action" model="ir.actions.act_window">
+            <field name="name">Vehicle Agencies</field>
+            <field name="res_model">car.agency</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+
+        <record id="car_agency_view_tree" model="ir.ui.view">
+            <field name="name">car agency tree</field>
+            <field name="model">car.agency</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                    <field name="car_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="car_agency_view_form" model="ir.ui.view">
+            <field name="name">car agency form</field>
+            <field name="model">car.agency</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div name="btn_box" class="oe_btn_box">
+                                 <button
+                                         name="action_view_cars"
+                                         type="object"
+                                         string="View Cars"
+                                         class="oe_stat_button"
+                                         icon="fa-car"/>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="responsible_id" widget="many2one_tags"/>
+                            <field name="car_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="car_agency_search_view" model="ir.ui.view">
+            <field name="name">Car Agency Search View</field>
+            <field name="model">car.agency</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="group_responsible_id" string="responsible_id"
+                            context="{'group_by':'responsible_id'}"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

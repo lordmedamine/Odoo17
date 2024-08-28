@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="action_maintenance_wizard" model="ir.actions.act_window">
+            <field name="name">Send To Maintenance </field>
+            <field name="res_model">maintenance.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_maintenance_wizard_form" model="ir.ui.view">
+            <field name="name">maintenance.wizard.form</field>
+            <field name="model">maintenance.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Maintenance Wizard">
+                    <group>
+                        <field name="car_id"/>
+                        <field name="maintenance_date"/>
+                        <field name="maintenance_type"/>
+                        <field name="description"/>
+<!--                        <field name="cost"/>-->
+                    </group>
+                    <footer>
+                        <button name="create_maintenance" string="Create" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

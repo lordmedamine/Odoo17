@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="car_request_email_template" model="mail.template">
+            <field name="name">Request : Mail</field>
+            <field name="model_id" ref="car_agency_management.model_car_request"/>
+            <field name="email_to">{{ object.responsible_mail}}</field>
+            <field name="subject">{{ object.available_car.model }} and {{object.customer_id.name}}</field>
+            <field name="body_html" type="html">
+                <div style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+                    <h2 style="color: #333;">A New Request Was Sent!</h2>
+                    <p style="color: #666;">Dear ${object.partner_id.name},</p>
+                    <p style="color: #666;">A new request has been submitted and is awaiting your attention. Please
+                        review the details below:
+                    </p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Request Number:</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">{{object.car_request.id}}</td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Request Sent BY:</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">{{object.customer_id.name}}</td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Car selected is :</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">{{object.available_car.display_name}}
+                            </td>
+                        </tr>
+                        <!-- Add more fields as needed -->
+                    </table>
+                    <p style="color: #666; margin-top: 10px;">Thank you for your prompt attention to this matter.</p>
+                    <p style="color: #666;">Best regards,<br/>Softifi
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

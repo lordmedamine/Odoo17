@@ -1,0 +1,43 @@
+.oe_kanban_global_click {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.oe_kanban_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.oe_kanban_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.oe_kanban_image {
+    margin-right: 10px; /* Space between image and title */
+}
+
+.oe_kanban_title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.oe_kanban_description {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+    height: 60px; /* Set a fixed height for the description */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) if text overflows */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show only 3 lines of text */
+    -webkit-box-orient: vertical;
+}
+
+.oe_kanban_agencies {
+    margin-top: 10px;
+}

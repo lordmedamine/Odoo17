@@ -1,0 +1,48 @@
+.car_vehicle_kanban_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure content takes full height */
+}
+
+.car_vehicle_kanban_header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.car_vehicle_kanban_title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+    flex-grow: 1; /* Title takes available space */
+}
+
+.car_vehicle_kanban_details {
+    margin-bottom: 15px;
+}
+
+.car_vehicle_kanban_details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.car_vehicle_kanban_dates {
+    font-size: 14px;
+    color: #888;
+}
+
+.car_vehicle_kanban_tags {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.car_vehicle_kanban_tags div {
+    margin-bottom: 5px;
+}
+
+.car_vehicle_kanban_tags strong {
+    color: #333;
+}
+

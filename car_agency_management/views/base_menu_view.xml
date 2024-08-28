@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <menuitem
+                id="car_agency_management_root_menu"
+                name="Car Agency Management"
+                web_icon="car_agency_management.static/description/icon.png"/>
+
+
+        <menuitem
+                id="car_brand_menu_item"
+                name="Brands"
+                parent="car_agency_management_root_menu"
+                action="car_brand_view_action"
+        />
+
+        <menuitem
+                id="car_vehicle_menu"
+                name="Vehicles"
+                parent="car_agency_management_root_menu"
+
+        />
+
+        <menuitem
+                id="car_vehicle_menu_item"
+                name="Vehicles"
+                parent="car_vehicle_menu"
+                action="car_vehicle_view_action"
+        />
+
+        <menuitem
+                id="car_history_menu_item"
+                name="Rental History"
+                parent="car_vehicle_menu"
+                action="car_history_view_action"
+        />
+
+        <menuitem
+                id="car_agency_menu_item"
+                name="Agencies"
+                parent="car_agency_management_root_menu"
+                action="car_agency_view_action"
+        />
+
+        <menuitem
+                id="car_customer_menu_item"
+                name="Customers"
+                parent="car_agency_management_root_menu"
+                action="car_customer_view_action"
+                groups="car_agency_management.admin_group"
+        />
+
+        <menuitem
+                id="car_request_menu_item"
+                name="Requests"
+                parent="car_agency_management_root_menu"
+                action="car_request_view_action"
+
+        />
+
+        <menuitem
+                id="menu_car_maintenance"
+                name="Maintenance"
+                parent="car_agency_management_root_menu"
+                action="action_car_maintenance"
+                groups="car_agency_management.admin_group"
+        />
+
+        <menuitem id="menu_price_config"
+                  name="Price Configuration"
+                  parent="car_agency_management_root_menu"
+                  action="price_config_view_action"
+                  groups="car_agency_management.admin_group"/>
+
+    </data>
+</odoo>
+
+

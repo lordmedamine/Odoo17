@@ -1,0 +1,98 @@
+<odoo>
+    <data>
+        <record id="car_request_view_action" model="ir.actions.act_window">
+            <field name="name">Requests</field>
+            <field name="res_model">car.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="car_request_view_tree" model="ir.ui.view">
+            <field name="name">Car Request Tree View</field>
+            <field name="model">car.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="available_car"/>
+                    <field name="customer_id"/>
+                    <field name="car_agency"/>
+                    <field name="status"
+                           decoration-primary="status=='draft'"
+                           decoration-success="status=='confirmed'"
+                           decoration-danger="status=='refused'"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="car_request_view_form" model="ir.ui.view">
+            <field name="name">Car Request Form View</field>
+            <field name="model">car.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div name="btn_box" class="oe_btn_box">
+                            <button
+                                    name="action_draft_request"
+                                    type="object"
+                                    string="Draft Requesst"
+                                    class="btn btn-secondary"
+                                    icon="fa-envelope"
+                                    invisible="status in ['draft','confirmed','refused']"
+                                    groups="car_agency_management.admin_group"
+                            />
+                            <button
+                                    name="action_send_request"
+                                    type="object"
+                                    string="Send Requesst"
+                                    class="btn btn-secondary"
+                                    icon="fa-envelope"
+                                    invisible="status in ['pending','confirmed','refused']"
+                            />
+                            <button
+                                    name="action_confirm_request"
+                                    type="object"
+                                    string="Confirm"
+                                    class="btn btn-secondary"
+                                    icon="fa-check"
+                                    invisible="status in ['draft','confirmed','refused']"
+                                    groups="car_agency_management.admin_group"
+                            />
+                            <button
+                                    name="action_decline_request"
+                                    type="object"
+                                    string="Decline Request"
+                                    class="btn btn-secondary"
+                                    icon="fa-times"
+                                    invisible="status in ['draft','confirmed','refused']"
+                                    groups="car_agency_management.admin_group"
+                            />
+                            <button
+                                    name="check_invoice"
+                                    type="object"
+                                    string="View Invoice"
+                                    class="oe_stat_button"
+                                    icon="fa-money"
+                                    invisible="status in ['draft','pending','refused']"
+                            />
+                        </div>
+                        <header>
+                            <field name="status" widget="statusbar" />
+                        </header>
+                        <group>
+                            <group string="Car Related Info:">
+                                <field name="available_car" widget="many2one_tags"/>
+                                <field name="customer_id" widget="many2one_tags"/>
+                                <field name="car_agency" widget="many2one_tags"/>
+                            </group>
+                            <group string="Details:">
+                                <field name="start_date"/>
+                                <field name="rent_duration"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

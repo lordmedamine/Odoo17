@@ -1,0 +1,38 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_car_brand_admin,access car_brand admin,model_car_brand,admin_group,1,1,1,1
+access_car_brand_user,access car_brand user,model_car_brand,,1,0,0,0
+
+access_car_agency_user,access car_agency user,model_car_agency,users_group,1,0,0,0
+access_car_agency_admin,access car_agency admin,model_car_agency,,1,1,1,1
+
+access_car_vehicle_admin,access car_vehicle admin,model_car_vehicle,admin_group,1,1,1,1
+access_car_vehicle_user,access car_vehicle user,model_car_vehicle,,1,0,0,0
+
+access_res_partner_admin,access res_partner admin,model_res_partner,admin_group,1,1,1,1
+access_res_partner_agency_manager,access res_partner manager,model_res_partner,agency_manager_group,1,1,0,0
+access_res_partner_user,access res_partner user,model_res_partner,users_group,0,0,0,0
+
+access_car_request_user,access car_request user,model_car_request,users_group,1,0,1,0
+access_car_request_manager,access car_request manager,model_car_request,agency_manager_group,1,0,0,0
+access_car_request_admin,access car_request admin,model_car_request,admin_group,1,1,1,1
+
+access_car_history_admin,access car_history admin,model_car_history,car_agency_management.admin_group,1,1,1,1
+access_car_history_manager,access car_history manager,model_car_history,car_agency_management.agency_manager_group,1,0,0,0
+access_car_history_user,access car_history user,model_car_history,car_agency_management.users_group,1,0,0,0
+
+access_car_invoice_admin,access car_invoice admin,model_car_invoice,,1,0,1,1
+
+access_car_maintenance_admin,access car_maintenance admin,model_car_maintenance,,1,1,1,1
+access_car_maintenance_user,access car_maintenance user,model_car_maintenance,users_group,0,0,0,0
+
+access_res_config_settings_admin,access res_config_settings admin,model_res_config_settings,admin_group,1,1,1,1
+access_res_config_settings_user,access res_config_settings user,model_res_config_settings,,0,0,0,0
+access_vehicle_ratting_user,access vehicle_ratting user,model_vehicle_ratting,,1,1,1,1
+
+access_rating_wizard_user,access rating_wizard user,model_rating_wizard,,1,1,1,1
+access_invoice_line_user,access invoice_line user,model_invoice_line,,1,0,1,1
+
+access_car_maintenance_user2,access car_maintenance user2,model_car_maintenance,,1,1,1,1
+access_maintenance_wizard_user,access maintenance_wizard user,model_maintenance_wizard,,1,1,1,1
+
+access_res_config_settings_user2,access res_config_settings user2,model_res_config_settings,,1,1,1,1

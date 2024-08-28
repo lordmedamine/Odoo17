@@ -1,0 +1,74 @@
+<odoo>
+    <record id="history_report" model="ir.actions.report">
+        <field name="name">History Report</field>
+        <field name="model">car.history</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_car_history"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">car_agency_management.history_report_template</field>
+    </record>
+
+    <template id="history_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="history-report">
+                        <h1 style="text-align: center; color: #4CAF50;">History Report</h1>
+                        <style>
+                            .history-report {
+                                font-family: 'Arial', sans-serif;
+                                margin: 20px;
+                            }
+                            .history-report table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-top: 20px;
+                            }
+                            .history-report th {
+                                background-color: #4CAF50;
+                                color: white;
+                                padding: 10px;
+                                text-align: left;
+                            }
+                            .history-report td {
+                                border: 1px solid #ddd;
+                                padding: 10px;
+                            }
+                            .history-report tbody tr:nth-child(even) {
+                                background-color: #f2f2f2;
+                            }
+                            .history-report tbody tr:hover {
+                                background-color: #ddd;
+                            }
+                        </style>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="4">General Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Client:</strong></td>
+                                    <td t-esc="doc.client.name"/>
+                                    <td><strong>Car ID:</strong></td>
+                                    <td t-esc="doc.car_id.model"/>
+                                </tr>
+                                <tr>
+                                    <td><strong>Agency:</strong></td>
+                                    <td t-esc="doc.agency.name"/>
+                                    <td><strong>Start Date:</strong></td>
+                                    <td t-esc="doc.start_date"/>
+                                </tr>
+                                <tr>
+                                    <td><strong>End Date:</strong></td>
+                                    <td t-esc="doc.end_date"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <record id="car_brand_view_action" model="ir.actions.act_window">
+            <field name="name">Vehicle Brands</field>
+            <field name="res_model">car.brand</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <record id="car_brand_view_tree" model="ir.ui.view">
+            <field name="name">car brand tree</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <tree class="custom_car_brand_tree_view">
+                    <field name="image" widget='image' class="oe_icon" options="{'size':[20,20]}"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="agency_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="car_brand_view_form" model="ir.ui.view">
+            <field name="name">car brand form</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div name="btn_box" class="oe_btn_box">
+                            <button
+                                    name="action_view_cars"
+                                    type="object"
+                                    string="View Cars"
+                                    class="oe_stat_button"
+                                    icon="fa-car"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Car Brand info:">
+                                <field name="image"/>
+                                <field name="description"/>
+                            </group>
+                            <group string="Agency info:">
+                                <field name="agency_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="car_brand_iew_kanban" model="ir.ui.view">
+            <field name="name">Car Brand Kanban</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_header">
+                                        <div class="oe_kanban_image">
+                                            <!-- Ensure the image field is handled correctly -->
+                                            <field name="image" widget='image' class="oe_icon"
+                                                   options="{'size':[40,40]}"/>
+                                        </div>
+                                        <h3 class="oe_kanban_title">
+                                            <field name="name"/>
+                                        </h3>
+                                    </div>
+                                    <p class="oe_kanban_description">
+                                        <field name="description"/>
+                                    </p>
+                                    <div class="oe_kanban_agencies">
+                                        <field name="agency_ids" widget='many2many_tags'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

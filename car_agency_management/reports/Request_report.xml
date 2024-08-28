@@ -1,0 +1,70 @@
+<odoo>
+    <record id="request_report" model="ir.actions.report">
+        <field name="name">Request Report</field>
+        <field name="model">car.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_car_request"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">car_agency_management.request_report_template</field>
+    </record>
+
+    <template id="request_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="request-report">
+                        <h1 style="text-align: center; color: #2196F3;">Request Report</h1>
+                        <style>
+                            .request-report {
+                                font-family: 'Arial', sans-serif;
+                                margin: 20px;
+                            }
+                            .request-report table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-top: 20px;
+                            }
+                            .request-report th {
+                                background-color: #2196F3;
+                                color: white;
+                                padding: 10px;
+                                text-align: left;
+                            }
+                            .request-report td {
+                                border: 1px solid #ddd;
+                                padding: 10px;
+                            }
+                            .request-report tbody tr:nth-child(even) {
+                                background-color: #f2f2f2;
+                            }
+                            .request-report tbody tr:hover {
+                                background-color: #ddd;
+                            }
+                        </style>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="4">General Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Customer:</strong></td>
+                                    <td t-esc="doc.customer_id.name"/>
+                                    <td><strong>Car:</strong></td>
+                                    <td t-esc="doc.available_car.model"/>
+                                </tr>
+                                <tr>
+                                    <td><strong>Agency:</strong></td>
+                                    <td t-esc="doc.car_agency.name"/>
+                                    <td><strong>Mail:</strong></td>
+                                    <td t-esc="doc.responsible_mail"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

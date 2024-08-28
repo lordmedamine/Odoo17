@@ -1,0 +1,208 @@
+add a constraint to make sure the end date is > than the start_date   DONE
+change the status to status bar   DONE
+
+1- add a customer using res.partner
+2- add Rental History to the car
+10- Automated Alerts:
+Implement automated alerts for cars that are due for maintenance, insurance renewal, or other important dates.
+add assurence end_date  to the car , it send a mail to the consurned agency that the date will end within 7 days
+
+
+//ToDo : added two button to the car_history  be able to check the customer
+        and the model assigned to the car
+// done
+//added two action to the car_history
+//and added the buttons to the form
+
+//ToDo : add a kanban to the car_vehicle and to the car_brand
+//done
+//added a kanban to car_vehicle and car_brand
+//added a new field to car_vehicle ("brand_image") to get the
+        brand logo from the brand assigned to it
+//added two files car_brand.css / car_vehicle.css to style both kanban
+
+//ToDo : add a calendar to history
+//done
+//went to the car_history_view and added a calendar
+
+//ToDo : add search filter to car
+//done
+//added group by model / agency / status to the ca_vehicle
+
+//ToDO :  check constraints for all classes
+//done
+//nothing to change yet
+
+//ToDo : change RecName for all models :
+        for car_vehile it will get the 'model'+'registration Number'
+        for Agency it will have AgencyName
+        for Customer it will have 'CustomerName'+'id'
+        for Brand it will have BrandName
+
+//done
+//agency rec will need to wait for the agency reword
+
+//ToDo
+request_model : customer / car / start_date / end_date / responsible(related res.partner / "mail")  //done
+shown cars : only available cars   //done
+status : draft / pending / confirmed / refused  //done
+buttons : ("workflow") //done
+send_request => ("while draft") / confirm ("while pending") / refuse ("while pending")  //done
+confirm => creation history //done
+
+send request : will be sent by mail
+
+//ToDo : add a report print for car_history / client_request
+done will improve it a bit
+
+
+WORK PLAN :
+Added 3 new fields to car brand ("country_of_origin","created_date","modified_date")
+created_date and modified_date will be readonly and it's a selection with 3 values for now [("germany","Germany"),("usa","USA"),("uk","UK")]
+override the create and write methode :
+        once i create a brand the created_date = Datetime.now() same for modified_date()
+        once i update the brand the modified_date will take the new value of Datetime.now()
+
+added Two new fields to car_vehicule :
+    color / maintenance_records("will a maintenance model")
+
+added a Lines on the car for history and maintenance later on :
+    created a new class vehicle_lines in car_vehicle
+    added a new field to car.vehicle line_ids
+    added the notebook to the form
+
+added a chatter to the car.vehicle tracking line_ids("for now")
+
+creating a ratting wizard
+
+solved the notebook problem by adding more line model one for each page
+
+adding a fields in car_vehicle for average rating
+
+chaging the rating from integer to stars
+
+
+//ToDo
+//add active id to the submit action button in the wizard
+//rating field name will be invis
+//show it in the tree
+//move it a bit upword
+
+
+
+
+18/9/2024:
+1-Fixed the Rating now it's shown in the car
+    made the car field read only in the rating field
+    made the rating field name invisible
+    added the average_rating display to the form tree and kanban
+    added an average rating to the car (average of all ratings by all users)
+
+2-added the car history to the car itself
+
+3-add a filter by quality to cars
+
+4-request added duration instead of end_date
+    onchange method to calculate end_date
+    changing all old method to work with ren duration instead
+
+5-created car.invoice model / view /report
+
+
+                    !problems while testing
+    !- car button not working properly in the car history
+    !- end_date/rent_days not working properly when creating
+    !- the total in the invoice must be the sum of totals in the lines
+    !-DONT FORGET  to set the end_date / start_date visibility in the vehicle
+
+19/09/2024
+1- changed the invoice status to a statusbar
+2- changed the start_date / end_date in the vehicle to be shown only once the car itself is rented
+3- Rent duration / Rent end_date fixed they works properly now
+4- The total amount now gets its value by the sum of total prices in the invoice_lines
+5- made the maintenance model / that gets filled by a wizard //work on progress
+
+
+                          --- WHILE TESTING ---
+        !- Noticed that i am not changing the car status value to rented when i confirm request
+        !- need to change the agency in the request to be filed automatically by the agency linked
+        to the selected vehicle
+
+
+20/09/2024
+worked on fields display for users/UI
+
+
+
+21/09/2024
+
+
+                --TESTING--
+    1- when  creating a car that have a specific brand
+       agencies should be one of the agencies that brand have
+                    //DONE
+
+    2-when creating a request the agency should get the car.agency
+                    //DONE
+
+    3.0- when confirming a request change the car status to rented
+                    //DONE
+
+    3-when confirming the request the car start_date take the request start_date
+                    //DONE
+
+    4-when confirming the request the car end_date take the request start_date + duration
+                    //DONE
+
+    5-add the rent_duration to invoice for future calculation
+                    //DONE
+
+    6-invoice customer should be readonly same for car and invoice_date
+                    //DONE
+
+    7- do we need the due date in the invoice ?
+                    //DONE (set it to invisible for now)
+
+    8- when creating a maintenance we dont need coast remove it and change car to readonly
+                    //DONE
+
+    9-changed the colors display in the vehicle
+                    //DONE
+
+               --ToDo--
+    1- the config menu
+    2- report fields display names and values need to be checked
+
+
+
+
+
+
+model price.config:
+    ratting  / price for each ratting
+    car model: price_day by default
+    _onchange for the price depending onn the ratting itself after comparing to the config_ratting price
+
+
+
+22/8/2024:
+config fully functional ,
+added a cron to change status to available once we passed end_date to the vehicle
+added a cron to send a mail once only 1 day is left before end_date to the invoice
+added an action to set car status to available once request deleted
+ToDo Next : group and rules
+
+ToDo :
+apply the coast per day to the vehicle
+apply the groups and rules
+apply the groups to the buttons
+add an icon to the module
+TRY to make an effort to rework the report STOP being lazy  ("NO PROMISES")
+
+
+add end_date to the request for both tree and form   //DONE
+colorful request status //DONE
+rec_names for all model //DONE
+addd many2many_tags widget to the agencies in the brand model //DONE
+functions documontation //DONE
+remove the lines //DONE

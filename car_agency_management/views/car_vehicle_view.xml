@@ -1,0 +1,235 @@
+<odoo>
+    <data>
+        <record id="car_vehicle_view_action" model="ir.actions.act_window">
+            <field name="name">Vehicles</field>
+            <field name="res_model">car.vehicle</field>
+            <field name="view_mode">tree,form,search,kanban</field>
+        </record>
+
+        <record id="car_vehicle_view_tree" model="ir.ui.view">
+            <field name="name">Car Vehicle Tree View</field>
+            <field name="model">car.vehicle</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="registration_number"/>
+                    <field name="model"/>
+                    <field name="mileage"/>
+                    <field name="status" decoration-danger="status=='maintenance'"
+                           decoration-success="status=='available'" decoration-warning="status=='rented'"/>
+                    <field name="average_rating" widget="priority"/>
+                    <field name="brand_id"/>
+                    <field name="agency_id"/>
+                    <field name="car_color" widget="color" readonly="True"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="car_vehicle_view_form" model="ir.ui.view">
+            <field name="name">Car Vehicle Form View</field>
+            <field name="model">car.vehicle</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="send_to_maintenance"
+                                type="object"
+                                string="Maintenance"
+                                class="oe_highlight"
+                                groups="car_agency_management.admin_group"/>
+
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="registration_number"/>
+                            <h1>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="margin-right: 10px;">
+                                        <field name="registration_number"/>
+                                    </div>
+                                    <div>
+                                        <field name="average_rating" widget="priority"/>
+                                    </div>
+                                </div>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Car Vehicle Info:">
+                                <field name="model"/>
+                                <field name="mileage"/>
+                                <field name="car_color"/>
+                            </group>
+                            <group string="Details:">
+                                <field name="start_date" invisible="status == 'available'"/>
+                                <field name="end_date" invisible="status == 'available'"/>
+                                <field name="brand_id" widget="many2one_tags"/>
+                                <field name="agency_id" widget="many2one_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Histroy">
+                                <field name="history_ids">
+                                    <tree>
+                                        <field name="client"/>
+                                        <field name="car_id"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Maintenance">
+                                <field name="maintenance_record">
+                                    <tree>
+                                        <field name="car_id"/>
+                                        <field name="maintenance_date"/>
+                                        <field name="maintenance_type"/>
+                                        <field name="cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Rating">
+                                <field name="ratting_lines">
+                                    <tree editable="bottom">
+                                        <field name="rating_user"/>
+                                        <field name="rating_value" widget="priority"/>
+                                        <field name="comments"/>
+                                        <field name="vehicle"/>
+                                        <field name="rating_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="car_vehicle_search_view" model="ir.ui.view">
+            <field name="name">Car Vehicle Search View</field>
+            <field name="model">car.vehicle</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="registration_number" string="Registration Number"/>
+
+                    <filter name="filter_available" string="Available" domain="[('status', '=', 'available')]"/>
+                    <filter name="filter_rented" string="Rented" domain="[('status', '=', 'rented')]"/>
+                    <filter name="filter_good" string="Good" domain="[('average_rating', '=', 'good')]"/>
+                    <filter name="Filter_very_good" string="Very Good" domain="[('average_rating', '=', 'very_good')]"/>
+                    <filter name="group_model" string="Model" context="{'group_by':'model'}"/>
+                    <filter name="group_status" string="Satus" context="{'group_by':'status'}"/>
+                    <filter name="group_agency" string="Agency" context="{'group_by':'agency_id'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="check_date_cron" model="ir.cron">
+            <field name="name">Vehicle: Check Date</field>
+            <field name="model_id" ref="model_car_vehicle"/>
+            <field name="code">model.check_date()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="car_vehicle_view_kanban" model="ir.ui.view">
+            <field name="name">Car Vehicle Kanban</field>
+            <field name="model">car.vehicle</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="car_vehicle_kanban_content">
+                                    <div class="oe_kanban_header">
+                                        <div class="oe_kanban_image">
+                                            <field name="brand_image" widget='image' class="oe_icon"
+                                                   options="{'size':[40,40]}"/>
+                                        </div>
+                                        <h3 class="oe_kanban_title" style="display: flex; align-items: center;">
+                                            <div style="margin-right: 20px;">
+                                                <field name="registration_number"/>
+                                            </div>
+                                            <div style="margin-left: 20px;">
+                                                <field name="average_rating" widget="priority"/>
+                                            </div>
+                                        </h3>
+
+                                    </div>
+                                    <div class="car_vehicle_kanban_details">
+                                        <p class="car_vehicle_kanban_model">
+                                            <strong>Model:</strong>
+                                            <field name="model"/>
+                                            <field name="car_color"/>
+                                        </p>
+                                        <p class="car_vehicle_kanban_mileage">
+                                            <strong>Mileage:</strong>
+                                            <field name="mileage"/>
+                                        </p>
+                                        <p class="car_vehicle_kanban_status">
+                                            <strong>Status:</strong>
+                                            <field name="status"/>
+                                        </p>
+                                        <p class="car_vehicle_kanban_dates" invisible="status == 'available'">
+                                            <strong>Period:</strong>
+                                            <field name="start_date"/>
+                                            -
+                                            <field name="end_date"/>
+                                        </p>
+                                    </div>
+                                    <div class="car_vehicle_kanban_tags">
+                                        <div>
+                                            <strong>Brand:</strong>
+                                            <field name="brand_id" widget='many2one'/>
+                                        </div>
+                                        <div>
+                                            <strong>Agency:</strong>
+                                            <field name="agency_id" widget='many2one'/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="rate_action" model="ir.actions.server">
+            <field name="name">Car Rate</field>
+            <field name="model_id" ref="model_car_vehicle"/>
+            <field name="binding_model_id" ref="model_car_vehicle"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.open_rate_wizard()
+            </field>
+        </record>
+
+        <record id="end_maintenance_action" model="ir.actions.server">
+            <field name="name">Maintenance Done</field>
+            <field name="model_id" ref="model_car_vehicle"/>
+            <field name="binding_model_id" ref="model_car_vehicle"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.maintenance_done()
+            </field>
+        </record>
+
+
+        <record id="ir_cron_update_status" model="ir.cron">
+            <field name="name">Update Status Based on End Date</field>
+            <field name="model_id" ref="model_car_vehicle"/>
+            <field name="state">code</field>
+            <field name="code">model.update_status()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+
+    </data>
+</odoo>

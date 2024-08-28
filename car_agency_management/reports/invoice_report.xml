@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="invoice_report" model="ir.actions.report">
+            <field name="name">Invoice Report</field>
+            <field name="model">car.invoice</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_car_invoice"/>
+            <field name="binding_type">report</field>
+            <field name="report_name">car_agency_management.invoice_report_template</field>
+        </record>
+
+
+        <template id="invoice_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <h2>Invoice Report</h2>
+                            <p>
+                                <strong>Invoice ID:</strong>
+                                <span t-esc="doc.invoice_id"/>
+                            </p>
+                            <p>
+                                <strong>Customer:</strong>
+                                <span t-esc="doc.customer_id.name"/>
+                            </p>
+                            <p>
+                                <strong>Car:</strong>
+                                <span t-esc="doc.car_id.registration_number"/>
+                            </p>
+                            <p>
+                                <strong>Agency:</strong>
+                                <span t-esc="doc.agency_id.name"/>
+                            </p>
+                            <p>
+                                <strong>Total Amount:</strong>
+                                <span t-esc="doc.total_amount"/>
+                            </p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

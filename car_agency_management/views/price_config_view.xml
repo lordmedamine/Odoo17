@@ -1,0 +1,108 @@
+<odoo>
+    <data>
+        <!-- Configuration Settings Form View -->
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.bg.whatsapp</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//form[@class='oe_form_configuration']" position="inside">-->
+                                <xpath expr="//form" position="inside">
+                    <app data-string="Car_Agency" string="Car Agency" name="car">
+
+                    <settings>
+                        <group>
+                            <table class="table table-bordered" style="width: 800px;">
+                                <thead>
+                                    <tr style="background-color: #f2f2f2;">
+                                        <th style="text-align: center; width: 50px; padding: 10px;">Rating</th>
+                                        <th style="text-align: center; width: 650px ; padding: 10px;">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star"></i>
+                                        </td>
+                                        <td>
+                                            <label for="zero_star_price" string="0 Star Price:" class="oe_inline"/>
+                                            <field name="zero_star_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                        </td>
+                                        <td>
+                                            <label for="one_star_price" string="1 Star Price:" class="oe_inline"/>
+                                            <field name="one_star_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                        </td>
+                                        <td>
+                                            <label for="two_star_price" string="2 Star Price:" class="oe_inline"/>
+                                            <field name="two_star_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                        </td>
+                                        <td>
+                                            <label for="three_star_price" string="3 Star Price:" class="oe_inline"/>
+                                            <field name="three_star_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                        </td>
+                                        <td>
+                                            <label for="four_star_price" string="4 Star Price:" class="oe_inline"/>
+                                            <field name="four_star_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                            <i class="fa fa-star" style="color: gold;"></i>
+                                        </td>
+                                        <td>
+                                            <label for="five_star_price" string="5 Star Price:" class="oe_inline"/>
+                                            <field name="five_star_price"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+                    </settings>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="price_config_view_action" model="ir.actions.act_window">
+            <field name="name">Price Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+<!--            <field name="view_id" ref="res_config_settings_view_form"/>-->
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module':'car_agency_management', 'bin_size': False}</field>
+        </record>
+
+
+    </data>
+</odoo>

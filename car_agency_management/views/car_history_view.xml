@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <record id="car_history_view_action" model="ir.actions.act_window">
+            <field name="name">Vehicles History</field>
+            <field name="res_model">car.history</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+
+        <record id="car_history_view_tree" model="ir.ui.view">
+            <field name="name">Car History Tree View</field>
+            <field name="model">car.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="client"/>
+                    <field name="car_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="car_history_view_form" model="ir.ui.view">
+            <field name="name">Car History Form View</field>
+            <field name="model">car.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div name="btn_box" class="oe_btn_box">
+                            <button
+                                    name="action_view_car"
+                                    type="object"
+                                    string="View Car"
+                                    class="oe_stat_button"
+                                    icon="fa-car"/>
+                            <button
+                                    name="action_view_customer"
+                                    type="object"
+                                    string="View Customer"
+                                    class="oe_stat_button"
+                                    icon="fa-user"/>
+                        </div>
+                        <group>
+                            <group string="Details :">
+                                <field name="client"/>
+                                <field name="car_id"/>
+                            </group>
+                            <group string="Date info:">
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+          <!-- Add a new calendar view -->
+        <record id="car_history_view_calendar" model="ir.ui.view">
+            <field name="name">Car History Calendar View</field>
+            <field name="model">car.history</field>
+            <field name="arch" type="xml">
+                <calendar string="Car History Calendar" date_start="start_date" date_stop="end_date">
+                    <field name="start_date" type="date"/>
+                    <field name="end_date" type="date"/>
+                    <field name="client"/>
+                    <field name="car_id"/>
+                </calendar>
+            </field>
+        </record>
+
+    </data>
+</odoo>
